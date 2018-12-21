@@ -8,6 +8,19 @@ arraysAnswers = {
    */
   indexOf: function indexOf(arr, item) {
     // Implement a function, that returns the 0 based index of an element in an array.
+    var cont = 0;
+
+    if(arr == undefined || item == undefined){
+      return -1;
+    }
+    else{
+      for(var index = 0; index < arr.length; index++){
+        if(arr[index] === item){
+          return index;
+        }
+      }
+      return -1;
+    }
   },
 
   /**
@@ -17,7 +30,15 @@ arraysAnswers = {
    * @returns {Number} The numerical sum of all items in arr.
    */
   sum: function sum(arr) {
+    var result = 0;
 
+    if(arr != undefined){    
+      arr.forEach(function(element) {
+        result += element;
+      });
+    }
+
+    return result;
   },
 
   /**
@@ -28,7 +49,38 @@ arraysAnswers = {
    * @returns {Number[]} A new array containing all numbers from arr except item.
    */
   remove: function remove(arr, item) {
+    
+    result = [];
 
+    if(arr != undefined){    
+      arr.forEach(function(element) {
+        if(element !== item){
+          result.push(element);
+        }
+      });
+    }
+
+    return result;
+  },
+
+    /**
+   * Create a new array with the same items as arr, excluding item 
+   * 
+   * @param {Number[]} arr - An array of numbers
+   * @param {Number} item - A number to be excluded from the new array
+   * @returns {Number[]} A new array containing all numbers from arr except item.
+   */
+  removeWithoutCopy: function removeWithoutCopy(arr, item) {
+    
+    if(arr != undefined){
+      return arr.filter(function(element){
+        return element != item;
+      });
+    }
+    else{
+      arr = [];
+      return arr;
+    }
   },
 
   /**
@@ -39,7 +91,14 @@ arraysAnswers = {
    * @returns {Number[]} The array arr, with item appended.
    */
   append: function append(arr, item) {
-
+    if(arr != undefined){
+      arr.push(item);
+      return arr;
+    }
+    else{
+      arr = [];
+      return arr;
+    }
   },
 
   /**
@@ -49,7 +108,7 @@ arraysAnswers = {
    * @returns {Number[]} The array arr, with the last element removed..
    */
   truncate: function truncate(arr) {
-
+    
   },
 
   /**
