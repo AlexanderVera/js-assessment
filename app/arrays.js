@@ -108,7 +108,12 @@ arraysAnswers = {
    * @returns {Number[]} The array arr, with the last element removed..
    */
   truncate: function truncate(arr) {
-    
+    if(arr != undefined){
+      return arr.slice(0, arr.length-1);
+    }
+    else{
+      return [];
+    }
   },
 
   /**
@@ -119,7 +124,14 @@ arraysAnswers = {
    * @returns {Number[]} The array arr, with the first element item added
    */
   prepend: function prepend(arr, item) {
-
+    if(arr!=undefined){
+      arr.unshift(item);
+    }
+    else{
+      arr = [];
+      arr.push(item);
+    }
+    return arr;
   },
 
 
@@ -130,7 +142,13 @@ arraysAnswers = {
    * @returns {Number[]} The array arr, with the first element item removed.
    */
   curtail: function curtail(arr) {
-
+    if(arr!=undefined){
+      arr.shift();
+    }
+    else{
+      arr = [];
+    }
+    return arr;
   },
 
   /**
@@ -141,7 +159,20 @@ arraysAnswers = {
    * @returns {Number[]} A new array, with elements from arr1 and arr2 in that order.
    */
   concat: function concat(arr1, arr2) {
-
+    if(arr1 != undefined){
+      if(arr2 != undefined){
+        arr2.forEach(function(element) {
+            arr1.push(element);
+        });
+        return arr1;
+      }
+      else{
+        return arr1;
+      }
+    }
+    else{
+      return arr2;
+    }
   },
 
   /**
@@ -153,7 +184,17 @@ arraysAnswers = {
    * @returns {Number[]} The array arr, with the number item inserted at position index.
    */
   insert: function insert(arr, item, index) {
-
+    result = [];
+    if(arr!=undefined && index < arr.length){
+      for (let iterator2 = index; iterator2 < arr.length; iterator2++) {
+        result.push(arr[iterator2]);
+      }
+      result.push(item);
+      for (let iterator = 0; iterator < index; iterator++) {
+        result.push(arr[iterator]);
+      }
+    }
+    return result;
   },
 
   /**
