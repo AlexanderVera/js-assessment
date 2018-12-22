@@ -9,15 +9,34 @@ recursionAnswers = {
       }
    *
    * Where ... is the same type of object
-   * 
+   *  
    * @param {fileSystemObject} data - a file system object as described above
    * @param {String} dirName - a directory name the files are desired to be listed from.
    * Note: This parameter is optional. If it is not provided, list ALL files.
    * 
-   * @returns {Number[]} The files under the directory dirName, including subdiretories.
+   * @returns {String[]} The files under the directory dirName, including subdiretories.
    */
   listFiles: function listFiles(data, dirName) {
-
+    result = [];
+    if((data.files == undefined || data.files.length == 0) && (data.subDirs == undefined || data.subDirs.length == 0)){
+      return [];
+    }
+    else{
+      if((data.files != undefined && data.files.length > 0)){
+          for(var i = 0; i < data.files.length; i++){
+            data.files.forEach(function(element) {
+            result.push(element);
+          });
+        }
+        if(data.subDirs != undefined && data.subDirs.length > 0){
+          for (let index = 0; index < data.subDirs.length; index++) {
+            const element = data.subDirs[index];
+            result.concat(listFiles(data, dirName));
+          }
+        }
+        return result;
+      }
+    }
   },
 
   /**
@@ -30,6 +49,11 @@ recursionAnswers = {
    * @returns {Number} The nth fibonacci number
    */
   fibonacci: function fibonacci(n) {
-
+    if(n < 2){
+      return n;
+    }
+    else{
+      return fibonacci(n - 1) + fibonacci(n - 2);
+    }
   },
 };

@@ -72,15 +72,10 @@ arraysAnswers = {
    */
   removeWithoutCopy: function removeWithoutCopy(arr, item) {
     
-    if(arr != undefined){
-      return arr.filter(function(element){
-        return element != item;
-      });
-    }
-    else{
-      arr = [];
-      return arr;
-    }
+    return arr.filter(function(value){
+      return value != item;
+    });
+
   },
 
   /**
@@ -184,17 +179,10 @@ arraysAnswers = {
    * @returns {Number[]} The array arr, with the number item inserted at position index.
    */
   insert: function insert(arr, item, index) {
-    result = [];
     if(arr!=undefined && index < arr.length){
-      for (let iterator2 = index; iterator2 < arr.length; iterator2++) {
-        result.push(arr[iterator2]);
-      }
-      result.push(item);
-      for (let iterator = 0; iterator < index; iterator++) {
-        result.push(arr[iterator]);
-      }
+      arr.splice(index, 0, item);
     }
-    return result;
+    return arr;
   },
 
   /**
@@ -205,7 +193,19 @@ arraysAnswers = {
    * @returns {Number} The count of the number of times the number item appeared in arr.
    */
   count: function count(arr, item) {
-
+    if(arr != undefined && arr.length > 0){
+      if(arr[0] === item){
+        arr.shift();
+        return 1 + count(arr, item);
+      }
+      else{
+        arr.shift();
+        return 0 + count(arr, item);
+      }
+    }
+    else{
+      return 0;
+    }
   },
 
   /**
@@ -215,7 +215,27 @@ arraysAnswers = {
    * @returns {Number[]} An array of numbers that appear in arr more than once.
    */
   duplicates: function duplicates(arr) {
+    
+    var result = [];
 
+    if(arr == undefined || arr.length == 0){
+      return [];
+    }
+    
+    const element = arr.shift();
+    
+    if(arr.includes(element)){
+      result.push(element); 
+      for( var i = 0; i < arr.length-1; i++){ 
+        if ( arr[i] === element) {
+          arr.splice(i, 1); 
+        }
+      }
+          
+    }
+
+    return result.concat(duplicates(arr)); 
+    
   },
 
   /**
@@ -225,7 +245,13 @@ arraysAnswers = {
    * @returns {Number[]} A new array of numbers that contains the elements of arr squared.
    */
   square: function square(arr) {
+    result = [];
+    
+    arr.forEach(function(element) {
+      result.push(element*element);
+    });
 
+    return result;
   },
 
   /**
@@ -236,6 +262,12 @@ arraysAnswers = {
    * @returns {Number[]} A new array of numbers which represent the indices of target in arr.
    */
   findAllOccurrences: function findAllOccurrences(arr, target) {
-
+    result = [];
+    for (let index = 0; index < arr.length; index++) {
+      if(arr[index] == target){
+        result.push(index);
+      }
+    }
+    return result;
   },
 };
